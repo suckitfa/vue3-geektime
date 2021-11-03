@@ -6,14 +6,26 @@
     <p><button @click="updateIcon">change Icon</button></p>
     <p><button @click="toggle">toggle full screen</button></p>
     <p><button>toggleDark</button></p>
+    <P>
+      <h1>你的评分：</h1>
+      <Rate 
+      :theme="'green'"
+      v-model="score"
+      />
+    </P>
     <router-view></router-view>
   </div>
 </template>
 
 <script setup>
+import {ref} from 'vue'
 import useFavicon from './hooks/useFaviconHooks';
 import {useFullscreen} from '@vueuse/core'
-
+import Rate from './components/Rate.vue'
+let score = ref(3)
+function update(num) {
+  score.value = num;
+}
 let {favicon}  = useFavicon()
 // 修改数据即可
 function updateIcon() {
